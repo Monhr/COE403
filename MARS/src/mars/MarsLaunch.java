@@ -605,7 +605,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	// Displays requested register or registers   			
    				
       private void displayRegistersPostMortem() {
-         int value;  // handy local to use throughout the next couple loops
+         long value;  // handy local to use throughout the next couple loops
          String strValue;
          // Display requested register contents
          out.println();
@@ -617,12 +617,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                if (verbose) 
                   out.print(reg+"\t");
                value = RegisterFile.getUserRegister(reg).getValue();
-               out.println( formatIntForDisplay(value) );
+               out.println( formatLongForDisplay(value) );
             } 
             else {
                      // floating point register
                float fvalue = Coprocessor1.getFloatFromRegister(reg);
-               int ivalue = Coprocessor1.getIntFromRegister(reg);
+               long ivalue = Coprocessor1.getIntFromRegister(reg);
                double dvalue = Double.NaN;
                long lvalue = 0;
                boolean hasDouble = false;
@@ -639,7 +639,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   // display float (and double, if applicable) in hex
                   out.print(
                            Binary.binaryStringToHexString(
-                                          Binary.intToBinaryString(ivalue)));							
+                                          Binary.longToBinaryString(ivalue)));							
                   if (hasDouble) {
                      out.println("\t"+
                               Binary.binaryStringToHexString(
@@ -660,7 +660,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                } 
                else { // displayFormat == ASCII
-                  out.print(Binary.intToAscii(ivalue));
+                  out.print(Binary.intToAscii((int)ivalue));
                   if (hasDouble) {
                      out.println("\t"+ 
                             Binary.intToAscii(Binary.highOrderLongToInt(lvalue))+
@@ -693,7 +693,25 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          }   
          return strValue;
       }
-   	
+
+      private String formatLongForDisplay(long value) {
+          String strValue; 
+          switch (displayFormat) {
+             case DECIMAL : 
+                strValue = ""+value;
+                break;
+             case HEXADECIMAL :
+                strValue = Binary.longToHexString(value);
+                break;
+             case ASCII :
+                strValue = Binary.intToAscii((int)value);
+                break;
+             default :
+                strValue = Binary.longToHexString(value);
+          }   
+          return strValue;
+       }
+    	
    	//////////////////////////////////////////////////////////////////////
    	// Displays requested memory range or ranges
    	

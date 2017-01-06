@@ -212,7 +212,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public static float getFloatFromRegister(int reg){
          float result = 0F;
          if(reg >= 0 && reg < registers.length) {
-            result = Float.intBitsToFloat(registers[reg].getValue());
+            //result = Float.longBitsToFloat(registers[reg].getValue());
          }
          return result;
       }
@@ -235,8 +235,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	  *   @return The int bit pattern stored by that register.
    	  **/
    	
-       public static int getIntFromRegister(int reg){
-         int result = 0;
+       public static long getLongFromRegister(int reg){
+         long result = 0;
          if(reg >= 0 && reg < registers.length) {
             result = registers[reg].getValue();
          }
@@ -250,8 +250,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	  *   @return The int bit pattern stored by that register.
    	  **/
    	  		
-       public static int getIntFromRegister(String reg) {
-         return getIntFromRegister(getRegisterNumber(reg));
+       public static long getIntFromRegister(String reg) {
+         return getLongFromRegister(getRegisterNumber(reg));
       }
    	
    
@@ -264,12 +264,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	
        public static double getDoubleFromRegisterPair(int reg) 
                                     throws InvalidRegisterAccessException {
-         double result = 0.0;
+         //double result = 0.0;
          if (reg % 2 != 0) {
             throw new InvalidRegisterAccessException();
          } 
-         long bits = Binary.twoIntsToLong(registers[reg+1].getValue(),registers[reg].getValue());
-         return Double.longBitsToDouble(bits);
+         //long bits = Binary.twoIntsToLong(registers[reg+1].getValue(),registers[reg].getValue());
+         //return Double.longBitsToDouble(bits);
+         return 0;
       }
    
    
@@ -300,7 +301,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          if (reg % 2 != 0) {
             throw new InvalidRegisterAccessException();
          } 
-         return Binary.twoIntsToLong(registers[reg+1].getValue(),registers[reg].getValue());
+         //return Binary.twoIntsToLong(registers[reg+1].getValue(),registers[reg].getValue());
+         return 0;
       }
    
    
@@ -346,7 +348,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	  *   @return The int value of the given register.
    	  **/
    	
-       public static int getValue(int num){
+       public static long getValue(int num){
          return registers[num].getValue();
       }
       		
@@ -440,7 +442,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          int old = 0;
          if (flag >= 0 && flag < numConditionFlags) {
             old = getConditionFlag(flag);
-            condition.setValue(Binary.setBit(condition.getValue(),flag));
+            condition.setValue(Binary.setBit((int)condition.getValue(),flag));
             if (Globals.getSettings().getBackSteppingEnabled())
                if (old==0) {
                   Globals.program.getBackStepper().addConditionFlagClear(flag);
@@ -462,7 +464,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          int old = 0;
          if (flag >= 0 && flag < numConditionFlags) {
             old = getConditionFlag(flag);
-            condition.setValue(Binary.clearBit(condition.getValue(),flag));
+            condition.setValue(Binary.clearBit((int)condition.getValue(),flag));
             if (Globals.getSettings().getBackSteppingEnabled())
                if (old==0) {
                   Globals.program.getBackStepper().addConditionFlagClear(flag);
@@ -494,7 +496,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 *  @return array of int condition flags
    	 */
        public static int getConditionFlags() {
-         return condition.getValue();
+         return (int) condition.getValue();
       }	
    	
    	

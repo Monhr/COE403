@@ -170,7 +170,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 */
        public void update(Observable register, Object accessNotice) {
          if (((AccessNotice)accessNotice).getAccessType()==AccessNotice.WRITE) {
-            updateDisplays(new FlavorsOfFloat().buildOneFromInt(attachedRegister.getValue()));
+            //updateDisplays(new FlavorsOfFloat().buildOneFromInt(attachedRegister.getValue()));
          }
       }
       	  	
@@ -365,12 +365,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                         instructions.setText("The program is not attached to any MIPS floating point registers.");
                      } 
                      else {
-                        attachedRegister = fpRegisters[selectedIndex-1];
+                        /*attachedRegister = fpRegisters[selectedIndex-1];
                         updateDisplays(new FlavorsOfFloat().buildOneFromInt(attachedRegister.getValue()));
                         if (isObserving()) {
                            addAsObserver();
                         }
-                        instructions.setText("The program and register "+attachedRegister.getName()+" will respond to each other when MIPS program connected or running.");
+                        instructions.setText("The program and register "+attachedRegister.getName()+" will respond to each other when MIPS program connected or running.");*/
                      }
                   }
                });
@@ -519,9 +519,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           //  Assign all fields given int representing 32 bit representation of float value
           private FlavorsOfFloat buildOneFromInt(int intValue) {
             this.intValue = intValue;
-            this.binaryString = Binary.intToBinaryString(intValue);
+            this.binaryString = Binary.longToBinaryString(intValue);
             this.hexString = Binary.binaryStringToHexString(this.binaryString);
-            this.decimalString = new Float(Float.intBitsToFloat(Binary.binaryStringToInt(this.binaryString))).toString();
+            this.decimalString = new Double(Double.longBitsToDouble(Binary.binaryStringToLong(this.binaryString))).toString();
             this.expansionString = buildExpansionFromBinaryString(this.binaryString);
             return this;
          }
