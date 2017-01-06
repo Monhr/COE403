@@ -117,7 +117,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	  */
    	  
        public synchronized int setValue(int val){
-         int old = value;
+         long old = value;
          value = val;
          notifyAnyObservers(AccessNotice.WRITE);
          return old;
