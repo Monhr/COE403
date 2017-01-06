@@ -38,12 +38,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     
     public class Register extends Observable {
       private String name;
-      private int number, resetValue;
+      private int number;
+      private long resetValue;
    	// volatile should be enough to allow safe multi-threaded access  
    	// w/o the use of synchronized methods.  getValue and setValue
    	// are the only methods here used by the register collection
    	// (RegisterFile, Coprocessor0, Coprocessor1) methods. 
-      private volatile int value;
+      private volatile long value;
       
    	 /**
         *  Creates a new register with specified name, number, and value.
@@ -74,7 +75,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	  *   @return value The value of the Register.
    	  */
    	  
-       public synchronized int getValue(){
+       public synchronized long getValue(){
          notifyAnyObservers(AccessNotice.READ);
          return value;
       }
@@ -86,7 +87,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	  *   @return value The value of the Register.
    	  */
    	  
-       public synchronized int getValueNoNotify(){
+       public synchronized long getValueNoNotify(){
          return value;
       }
 		
@@ -96,7 +97,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	  *   @return The reset (initial) value of the Register.
    	  */
    	  
-       public int getResetValue(){
+       public long getResetValue(){
          return resetValue;
       }   	
    	/**
