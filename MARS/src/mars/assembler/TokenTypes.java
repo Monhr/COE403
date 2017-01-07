@@ -112,7 +112,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        // See if it is a comment
          if (value.charAt(0) == '#')
             return TokenTypes.COMMENT;
-           
+         
        // See if it is one of the simple tokens 
          if (value.length() == 1) {
             switch (value.charAt(0)) {
@@ -126,6 +126,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   return TokenTypes.PLUS;
                case '-' : 
                   return TokenTypes.MINUS;
+               case '=' : 
+                   return TokenTypes.EQUALS;
             }
          }
 

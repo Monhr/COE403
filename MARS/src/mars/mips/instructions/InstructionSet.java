@@ -91,7 +91,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("add $t1 , $t2 , $t3",
+                new BasicInstruction("add $t1 = $t2 , $t3",
             	 "Addition with overflow : set $t1 to ($t2 plus $t3)",
                 BasicInstructionFormat.R3_FORMAT,
                 "000001 fffff sssss 0000 ttttt 00000 00",
@@ -114,7 +114,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("sub $t1,$t2,$t3",
+                new BasicInstruction("sub $t1 = $t2 , $t3",
             	 "Subtraction with overflow : set $t1 to ($t2 minus $t3)",
                 BasicInstructionFormat.R3_FORMAT,
                 "000001 fffff sssss 0000 ttttt 00000 00",
@@ -137,8 +137,598 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("addi $t1,$t2,-100",
-            	 "Addition immediate with overflow : set $t1 to ($t2 plus signed 16-bit immediate)",
+                 new BasicInstruction("eq $t1 = $t2 , $t3",
+             	 " set $t1 to ($t2 == $t3)",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 == sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("eq $t1 = $t2 , 100",
+             	 " set $t1 to ($t2 == imm12)",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      
+                      boolean res = sub1 == sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("ne $t1 = $t2 , $t3",
+             	 " set $t1 to ($t2 != $t3)",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 != sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("ne $t1 = $t2 , $t3",
+             	 " set $t1 to ($t2 != imm12)",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 != sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("lt $t1 = $t2 , $t3",
+             	 " set $t1 to ($t2 < $t3)",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 < sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("lt $t1 = $t2 , 100",
+             	 " set $t1 to ($t2 < imm12)",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 < sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("ltu $t1 = $t2 , $t3",
+             	 " set $t1 to (|$t2| < |$t3|)",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = Math.abs(sub1) < Math.abs(sub2);
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("ge $t1 = $t2 , $t3",
+             	 " set $t1 to ($t2 >= $t3)",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 >= sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("ge $t1 = $t2 , 100",
+             	 " set $t1 to ($t2 >= $t3)",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 >= sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("geu $t1 = $t2 , $t3",
+             	 " set $t1 to (|$t2| >= |$t3|)",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = Math.abs(sub1) >= Math.abs(sub2);
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and eq $t1 = $t2 , $t3",
+             	 "Rd = (Ra == Rb)? Rd : 0",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 == sub2;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or eq $t1 = $t2 , $t3",
+             	 "Rd = (Ra == Rb)? 1 : Rd",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 == sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1); 
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or eq $t1 = $t2 , 100",
+             	 "Rd = (Ra == imm12)? 1 : Rd",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 == sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1); 
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or ne $t1 = $t2 , $t3",
+             	 "Rd = (Ra == imm12)? 1 : Rd",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 != sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1); 
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or ne $t1 = $t2 , 100",
+             	 "Rd = (Ra == Rb)? 1 : Rd",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 != sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1); 
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and eq $t1 = $t2 , 100",
+             	 "Rd = (Ra == imm12)? Rd : 0",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 == sub2;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and ne $t1 = $t2 , $t3",
+             	 "Rd = (Ra != Rb)? Rd : 0",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 != sub2;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and ne $t1 = $t2 , 100",
+             	 "Rd = (Ra != imm12)? Rd : 0",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 != sub2;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and lt $t1 = $t2 , $t3",
+             	 "Rd = (Ra < Rb)? Rd : 0",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 < sub2;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or lt $t1 = $t2 , $t3",
+             	 "Rd = (Ra < Rb)? 1 : rd",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 < sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);  
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or lt $t1 = $t2 , 100",
+             	 "Rd = (Ra < imm12)? 1 : rd",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 < sub2;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);  
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and lt $t1 = $t2 , 100",
+             	 "Rd = (Ra < imm12)? Rd : 0",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 < sub2;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and ltu $t1 = $t2 , $t3",
+             	 "Rd = (|Ra| < |Rb|)? Rd : 0",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = Math.abs(sub1) < Math.abs(sub2) ;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or ltu $t1 = $t2 , $t3",
+             	 "Rd = (|Ra| < |Rb|)? 1 : Rd",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = Math.abs(sub1) < Math.abs(sub2) ;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);  
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and ltu $t1 = $t2 , $t3",
+             	 "Rd = (|Ra| < |Rb|)? Rd : 0",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = Math.abs(sub1) < Math.abs(sub2) ;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and ge $t1 = $t2 , $t3",
+             	 "Rd = (Ra > Rb)? Rd : 0",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 >= sub2 ;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or ge $t1 = $t2 , $t3",
+             	 "Rd = (Ra > Rb)? 1 : Rd",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = sub1 >= sub2 ;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1); 
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or ge $t1 = $t2 , 100",
+             	 "Rd = (Ra > imm12)? 1 : Rd",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 >= sub2 ;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1); 
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and ge $t1 = $t2 , 100",
+             	 "Rd = (Ra > Rb)? Rd : 0",
+             	BasicInstructionFormat.I_FORMAT,
+                "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2];
+                      boolean res = sub1 >= sub2 ;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("and geu $t1 = $t2 , $t3",
+             	 "Rd = (|Ra| >= |Rb|)? Rd : 0",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = Math.abs(sub1) >= Math.abs(sub2) ;
+                      if(res)
+                    	;  
+                      else
+                    	  RegisterFile.updateRegister(operands[0], 0);
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("or geu $t1 = $t2 , $t3",
+             	 "Rd = (|Ra| >= |Rb|)? 1 :Rd",
+                 BasicInstructionFormat.R3_FORMAT,
+                 "000001 fffff sssss 0000 ttttt 00000 00",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = RegisterFile.getValue(operands[2]);
+                      boolean res = Math.abs(sub1) >= Math.abs(sub2) ;
+                      if(res)
+                    	  RegisterFile.updateRegister(operands[0], 1);  
+                      else
+                    	  ;
+                   }
+                }));
+         instructionList.add(
+                new BasicInstruction("add $t1 = $t2 , -100",
+            	 "Addition immediate with overflow : set $t1 to ($t2 plus signed 12-bit immediate)",
                 BasicInstructionFormat.I_FORMAT,
                 "001000 sssss fffff tttttttttttttttt",
                 new SimulationCode()
@@ -147,7 +737,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   {
                      int[] operands = statement.getOperands();
                      int add1 = RegisterFile.getValue(operands[1]);
-                     int add2 = operands[2] << 16 >> 16;
+                     int add2 = operands[2] << 20 >> 20;
                      int sum = add1 + add2;
                   // overflow on A+B detected when A and B have same sign and A+B has other sign.
                      if ((add1 >= 0 && add2 >= 0 && sum < 0)
@@ -159,6 +749,29 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                      RegisterFile.updateRegister(operands[0], sum);
                   }
                }));
+         instructionList.add(
+                 new BasicInstruction("subf $t1 = $t2 , -100",
+             	 "Subtraction  immediate with overflow : set $t1 to (-$t2 plus signed 12-bit immediate)",
+                 BasicInstructionFormat.I_FORMAT,
+                 "001000 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      int sub1 = RegisterFile.getValue(operands[1]);
+                      int sub2 = operands[2] << 20 >> 20;
+                      int dif = sub2 - sub1;
+                   // overflow on A+B detected when A and B have same sign and A+B has other sign.
+                      if ((sub1 >= 0 && sub2 < 0 && dif < 0)
+                              || (sub1 < 0 && sub2 >= 0 && dif >= 0))
+                           {
+                              throw new ProcessingException(statement,
+                                  "arithmetic overflow",Exceptions.ARITHMETIC_OVERFLOW_EXCEPTION);
+                           }
+                      RegisterFile.updateRegister(operands[0], dif);
+                   }
+                }));
          instructionList.add(
                 new BasicInstruction("addu $t1,$t2,$t3",
             	 "Addition unsigned without overflow : set $t1 to ($t2 plus $t3), no overflow",
@@ -445,7 +1058,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("and $t1,$t2,$t3",
+                new BasicInstruction("and $t1 = $t2 , $t3",
             	 "Bitwise AND : Set $t1 to bitwise AND of $t2 and $t3",
                 BasicInstructionFormat.R_FORMAT,
                 "000000 sssss ttttt fffff 00000 100100",
@@ -460,7 +1073,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("or $t1,$t2,$t3",
+                new BasicInstruction("or $t1 = $t2 , $t3",
             	 "Bitwise OR : Set $t1 to bitwise OR of $t2 and $t3",
                 BasicInstructionFormat.R_FORMAT,
                 "000000 sssss ttttt fffff 00000 100101",
@@ -475,8 +1088,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("andi $t1,$t2,100",
-            	 "Bitwise AND immediate : Set $t1 to bitwise AND of $t2 and zero-extended 16-bit immediate",
+                new BasicInstruction("and $t1 = $t2 , 100",
+            	 "Bitwise AND immediate : Set $t1 to bitwise AND of $t2 and  12-bit immediate",
                 BasicInstructionFormat.I_FORMAT,
                 "001100 sssss fffff tttttttttttttttt",
                 new SimulationCode()
@@ -484,15 +1097,15 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                    public void simulate(ProgramStatement statement) throws ProcessingException
                   {
                      int[] operands = statement.getOperands();
-                  // ANDing with 0x0000FFFF zero-extends the immediate (high 16 bits always 0).
+                  
                      RegisterFile.updateRegister(operands[0],
                         RegisterFile.getValue(operands[1])
-                        & (operands[2] & 0x0000FFFF));
+                        & (operands[2]));
                   }
                }));
          instructionList.add(
-                new BasicInstruction("ori $t1,$t2,100",
-            	 "Bitwise OR immediate : Set $t1 to bitwise OR of $t2 and zero-extended 16-bit immediate",
+                new BasicInstruction("or $t1 = $t2 , 100",
+            	 "Bitwise OR immediate : Set $t1 to bitwise OR of $t2 and 12-bit immediate",
                 BasicInstructionFormat.I_FORMAT,
                 "001101 sssss fffff tttttttttttttttt",
                 new SimulationCode()
@@ -500,14 +1113,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                    public void simulate(ProgramStatement statement) throws ProcessingException
                   {
                      int[] operands = statement.getOperands();
-                  // ANDing with 0x0000FFFF zero-extends the immediate (high 16 bits always 0).
+                 
                      RegisterFile.updateRegister(operands[0],
                         RegisterFile.getValue(operands[1])
-                        | (operands[2] & 0x0000FFFF));
+                        | (operands[2]));
                   }
                }));
          instructionList.add(
-                new BasicInstruction("nor $t1,$t2,$t3",
+                new BasicInstruction("nor $t1 = $t2 , $t3",
             	 "Bitwise NOR : Set $t1 to bitwise NOR of $t2 and $t3",
                 BasicInstructionFormat.R_FORMAT,
                 "000000 sssss ttttt fffff 00000 100111",
@@ -522,7 +1135,22 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("xor $t1,$t2,$t3",
+                 new BasicInstruction("nor $t1 = $t2 , 100",
+             	 "Bitwise NOR : Set $t1 to bitwise NOR of $t2 and 12-bit immed",
+             	BasicInstructionFormat.I_FORMAT,
+                "001110 sssss fffff tttttttttttttttt",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                      RegisterFile.updateRegister(operands[0],
+                         ~(RegisterFile.getValue(operands[1])
+                         | RegisterFile.getValue(operands[2])));
+                   }
+                }));
+         instructionList.add(
+                new BasicInstruction("xor $t1 = $t2 , $t3",
             	 "Bitwise XOR (exclusive OR) : Set $t1 to bitwise XOR of $t2 and $t3",
                 BasicInstructionFormat.R_FORMAT,
                 "000000 sssss ttttt fffff 00000 100110",
@@ -537,8 +1165,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("xori $t1,$t2,100",
-            	 "Bitwise XOR immediate : Set $t1 to bitwise XOR of $t2 and zero-extended 16-bit immediate",
+                new BasicInstruction("xor $t1 = $t2 , 100",
+            	 "Bitwise XOR immediate : Set $t1 to bitwise XOR of $t2 and  12-bit immediate",
                 BasicInstructionFormat.I_FORMAT,
                 "001110 sssss fffff tttttttttttttttt",
                 new SimulationCode()
@@ -546,14 +1174,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                    public void simulate(ProgramStatement statement) throws ProcessingException
                   {
                      int[] operands = statement.getOperands();
-                  // ANDing with 0x0000FFFF zero-extends the immediate (high 16 bits always 0).
+                  
                      RegisterFile.updateRegister(operands[0],
                         RegisterFile.getValue(operands[1])
-                        ^ (operands[2] & 0x0000FFFF));
+                        ^ (operands[2]));
                   }
                }));					
          instructionList.add(
-                new BasicInstruction("sll $t1,$t2,10",
+                new BasicInstruction("shl $t1 = $t2,10",
             	 "Shift left logical : Set $t1 to result of shifting $t2 left by number of bits specified by immediate",
                 BasicInstructionFormat.R_FORMAT,
                 "000000 00000 sssss fffff ttttt 000000",
@@ -567,7 +1195,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("sllv $t1,$t2,$t3",
+                new BasicInstruction("shl $t1 = $t2 , $t3",
             	 "Shift left logical variable : Set $t1 to result of shifting $t2 left by number of bits specified by value in low-order 5 bits of $t3",
                 BasicInstructionFormat.R_FORMAT,
                 "000000 ttttt sssss fffff 00000 000100",
@@ -583,7 +1211,40 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("srl $t1,$t2,10",
+                 new BasicInstruction("ror $t1 = $t2 , $t3",
+             	 "rotate right variable : Set $t1 to result of circular rotating $t2 right by number of bits specified by value in $t3",
+                 BasicInstructionFormat.R_FORMAT,
+                 "000000 ttttt sssss fffff 00000 000100",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                   
+                      
+                      RegisterFile.updateRegister(operands[0],
+                    		  Integer.rotateRight(RegisterFile.getValue(operands[1]), (RegisterFile.getValue(operands[2]))));
+                   }
+                }));
+         instructionList.add(
+                 new BasicInstruction("ror $t1 = $t2 , 100",
+             	 "rotate right variable : Set $t1 to result of circular rotating $t2 right by number of bits specified by 12-bit immed",
+                 BasicInstructionFormat.R_FORMAT,
+                 "000000 ttttt sssss fffff 00000 000100",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                   
+                      
+                      RegisterFile.updateRegister(operands[0],
+                    		  Integer.rotateRight(RegisterFile.getValue(operands[1]), (RegisterFile.getValue(operands[2]))));
+                   }
+                }));
+         
+         instructionList.add(
+                new BasicInstruction("srl $t1 = $t2 , 10",
             	 "Shift right logical : Set $t1 to result of shifting $t2 right by number of bits specified by immediate",
                 BasicInstructionFormat.R_FORMAT,
                 "000000 00000 sssss fffff ttttt 000010",
@@ -598,7 +1259,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("sra $t1,$t2,10",
+                new BasicInstruction("sar $t1 = $t2 , 10",
                 "Shift right arithmetic : Set $t1 to result of sign-extended shifting $t2 right by number of bits specified by immediate",
             	 BasicInstructionFormat.R_FORMAT,
                 "000000 00000 sssss fffff ttttt 000011",
@@ -613,7 +1274,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("srav $t1,$t2,$t3",
+                new BasicInstruction("sar $t1 = $t2 , $t3",
             	 "Shift right arithmetic variable : Set $t1 to result of sign-extended shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3",
                 BasicInstructionFormat.R_FORMAT,
                 "000000 ttttt sssss fffff 00000 000111",
@@ -629,7 +1290,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   }
                }));
          instructionList.add(
-                new BasicInstruction("srlv $t1,$t2,$t3",
+                new BasicInstruction("shr $t1 = $t2 , $t3",
             	 "Shift right logical variable : Set $t1 to result of shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3",
                 BasicInstructionFormat.R_FORMAT,
                 "000000 ttttt sssss fffff 00000 000110",
@@ -644,6 +1305,22 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                         (RegisterFile.getValue(operands[2]) & 0x0000001F));
                   }
                }));
+         instructionList.add(
+                 new BasicInstruction("shr $t1 = $t2 , 100",
+             	 "Shift right logical variable : Set $t1 to result of shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3",
+                 BasicInstructionFormat.R_FORMAT,
+                 "000000 ttttt sssss fffff 00000 000110",
+                 new SimulationCode()
+                {
+                    public void simulate(ProgramStatement statement) throws ProcessingException
+                   {
+                      int[] operands = statement.getOperands();
+                    
+                      RegisterFile.updateRegister(operands[0],
+                         RegisterFile.getValue(operands[1]) >>> 
+                         (RegisterFile.getValue(operands[2])));
+                   }
+                }));
          instructionList.add(
                 new BasicInstruction("lw $t1,-100($t2)",
             	 "Load word : Set $t1 to contents of effective memory word address",
