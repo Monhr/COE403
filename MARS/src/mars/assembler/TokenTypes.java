@@ -61,6 +61,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       public static final TokenTypes INTEGER_16    = new TokenTypes("INTEGER_16");
       public static final TokenTypes INTEGER_16U    = new TokenTypes("INTEGER_16U");
       public static final TokenTypes INTEGER_32    = new TokenTypes("INTEGER_32");
+      
+      public static final TokenTypes INTEGER_21    = new TokenTypes("INTEGER_21");
+      public static final TokenTypes INTEGER_21U    = new TokenTypes("INTEGER_21U");
+
+      public static final TokenTypes INTEGER_12    = new TokenTypes("INTEGER_12");
+      public static final TokenTypes INTEGER_12U    = new TokenTypes("INTEGER_12U");
+      
       public static final TokenTypes REAL_NUMBER   = new TokenTypes("REAL_NUMBER");
       public static final TokenTypes QUOTED_STRING = new TokenTypes("QUOTED_STRING");
       public static final TokenTypes PLUS          = new TokenTypes("PLUS");
@@ -101,7 +108,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     
        public static TokenTypes matchTokenType(String value)
       {
-    	 System.out.println("Value = "+value);
+    	 //System.out.println("Value = "+value);
          TokenTypes type = null;
 		 // If it starts with single quote ('), it is a mal-formed character literal
 		 // because a well-formed character literal was converted to string-ified 
@@ -202,6 +209,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             if (i>=0 && i<=31) {
                return TokenTypes.INTEGER_5;
             }
+            
             if (i>=DataTypes.MIN_UHALF_VALUE && i<=DataTypes.MAX_UHALF_VALUE) {
                 return TokenTypes.INTEGER_16U;
              }

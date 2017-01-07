@@ -72,7 +72,7 @@ public final class DataTypes {
     public static final double MAX_DOUBLE_VALUE = Double.MAX_VALUE;
 /** Largest magnitude negative value that can be stored in a MIPS double(negative of the max) **/
     public static final double LOW_DOUBLE_VALUE = -Double.MAX_VALUE;
-    
+
    /**
     * Get length in bytes for numeric MIPS directives.
     * @param direct Directive to be measured.

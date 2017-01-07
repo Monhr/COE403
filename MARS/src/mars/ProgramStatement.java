@@ -119,7 +119,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             this.numOperands = 0;
             this.instruction = instr;
          
-            String opandCodes = "fst";
+            String opandCodes = "fsta";
             String fmt = instr.getOperationMask();
             BasicInstructionFormat instrFormat = instr.getInstructionFormat();
             int numOps = 0;

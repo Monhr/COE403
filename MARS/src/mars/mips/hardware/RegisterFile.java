@@ -51,7 +51,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          	new Register("$v0", 2, 0),new Register("$v1", 3, 0),
          	new Register("$a0", 4, 0),new Register("$a1", 5, 0),
          	new Register("$a2", 6, 0),new Register("$a3", 7, 0),
-         	new Register("$m0", 8, 0),new Register("$t1", 9, 0),
+         	new Register("$t0", 8, 0),new Register("$t1", 9, 0),
          	new Register("$t2", 10, 0),new Register("$t3", 11, 0), 
          	new Register("$t4", 12, 0),new Register("$t5", 13, 0),
          	new Register("$t6", 14, 0),new Register("$t7", 15, 0),
