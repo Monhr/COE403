@@ -1070,7 +1070,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("ret_and $t1 = $t2 , $t3",
-            	 "Bitwise AND : Set $t1 to bitwise AND of $t2 and $t3",
+            	 "PC = r31;Bitwise AND : Set $t1 to bitwise AND of $t2 and $t3",
                 BasicInstructionFormat.R3_FORMAT,
                 "000011 fffff sssss 0100 ttttt 00000 00",
                 new SimulationCode()
@@ -1087,7 +1087,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		
          instructionList.add(
                 new BasicInstruction("ret_shl $t1 = $t2 , $t3",
-            	 "Shift left logical variable : Set $t1 to result of shifting $t2 left by number of bits specified by value in low-order 5 bits of $t3",
+            	 "PC = r31;Shift left logical variable : Set $t1 to result of shifting $t2 left by number of bits specified by value in low-order 5 bits of $t3",
                 BasicInstructionFormat.R3_FORMAT,
                 "000011 fffff sssss 1000 ttttt 00000 00",
                 new SimulationCode()
@@ -1105,7 +1105,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                  new BasicInstruction("ret_ror $t1 = $t2 , $t3",
-             	 "rotate right variable : Set $t1 to result of circular rotating $t2 right by number of bits specified by value in $t3",
+             	 "PC = r31; rotate right variable : Set $t1 to result of circular rotating $t2 right by number of bits specified by value in $t3",
                  BasicInstructionFormat.R3_FORMAT,
                  "000011 fffff sssss 1011 ttttt 00000 00",
                  new SimulationCode()
@@ -1122,7 +1122,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 }));
          instructionList.add(
                 new BasicInstruction("ret_sar $t1 = $t2 , $t3",
-            	 "Shift right arithmetic variable : Set $t1 to result of sign-extended shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3",
+            	 "PC = r31; Shift right arithmetic variable : Set $t1 to result of sign-extended shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3",
                 BasicInstructionFormat.R3_FORMAT,
                 "000011 fffff sssss 1010 ttttt 00000 00",
                 new SimulationCode()
@@ -1140,7 +1140,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("ret_add $t1 = $t2 , $t3",
-            	 "Addition with overflow : set $t1 to ($t2 plus $t3)",
+            	 "PC = r31; Addition with overflow : set $t1 to ($t2 plus $t3)",
                 BasicInstructionFormat.R3_FORMAT,
                 "000011 fffff sssss 0000 ttttt 00000 00",
                 new SimulationCode()
@@ -1164,7 +1164,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                }));
          instructionList.add(
                 new BasicInstruction("ret_subf $t1 = $t2 , $t3",
-            	 "Subtraction with overflow : set $t1 to ($t2 minus $t3)",
+            	 "PC = r31; Subtraction with overflow : set $t1 to ($t2 minus $t3)",
                 BasicInstructionFormat.R3_FORMAT,
                 "000011 fffff sssss 0001 ttttt 00000 00",
                 new SimulationCode()
@@ -1188,7 +1188,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                }));
          instructionList.add(
                 new BasicInstruction("ret_or $t1 = $t2 , $t3",
-            	 "Bitwise OR : Set $t1 to bitwise OR of $t2 and $t3",
+            	 "PC = r31; Bitwise OR : Set $t1 to bitwise OR of $t2 and $t3",
                 BasicInstructionFormat.R3_FORMAT,
                 "000011 fffff sssss 0101 ttttt 00000 00",
                 new SimulationCode()
@@ -1206,7 +1206,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("ret_nor $t1 = $t2 , $t3",
-            	 "Bitwise NOR : Set $t1 to bitwise NOR of $t2 and $t3",
+            	 "PC = r31; Bitwise NOR : Set $t1 to bitwise NOR of $t2 and $t3",
                 BasicInstructionFormat.R3_FORMAT,
                 "000011 fffff sssss 0111 ttttt 00000 00",
                 new SimulationCode()
@@ -1223,7 +1223,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("ret_xor $t1 = $t2 , $t3",
-            	 "Bitwise XOR (exclusive OR) : Set $t1 to bitwise XOR of $t2 and $t3",
+            	 "PC = r31; Bitwise XOR (exclusive OR) : Set $t1 to bitwise XOR of $t2 and $t3",
                 BasicInstructionFormat.R3_FORMAT,
                 "000011 fffff sssss 0110 ttttt 00000 00",
                 new SimulationCode()
@@ -1241,7 +1241,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			   
          instructionList.add(
                 new BasicInstruction("ret_shr $t1 = $t2 , $t3",
-            	 "Shift right logical variable : Set $t1 to result of shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3",
+            	 "PC = r31; Shift right logical variable : Set $t1 to result of shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3",
                 BasicInstructionFormat.R3_FORMAT,
                 "000011 fffff sssss 1001 ttttt 00000 00",
                 new SimulationCode()
@@ -1260,7 +1260,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //RETI_ALUI
          instructionList.add(
                 new BasicInstruction("reti_add $t1 = $t2 , -100",
-            	 "Addition immediate with overflow : set $t1 to ($t2 plus signed 12-bit immediate)",
+            	 "PC = r31; Addition immediate with overflow : set $t1 to ($t2 plus signed 12-bit immediate)",
                 BasicInstructionFormat.I_FORMAT,
                 "000111 fffff 0000 sssss tttttttttttt",
                 new SimulationCode()
@@ -1284,7 +1284,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                }));
          instructionList.add(
                  new BasicInstruction("reti_subf $t1 = $t2 , -100",
-             	 "Subtraction  immediate with overflow : set $t1 to (-$t2 plus signed 12-bit immediate)",
+             	 "PC = r31; Subtraction  immediate with overflow : set $t1 to (-$t2 plus signed 12-bit immediate)",
                  BasicInstructionFormat.I_FORMAT,
                  "000111 fffff 0001 sssss tttttttttttt",
                  new SimulationCode()
@@ -1308,7 +1308,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 }));
          instructionList.add(
                 new BasicInstruction("reti_and $t1 = $t2 , 100",
-            	 "Bitwise AND immediate : Set $t1 to bitwise AND of $t2 and  12-bit immediate",
+            	 "PC = r31; Bitwise AND immediate : Set $t1 to bitwise AND of $t2 and  12-bit immediate",
                 BasicInstructionFormat.I_FORMAT,
                 "000111 fffff 0100 sssss tttttttttttt",
                 new SimulationCode()
@@ -1325,7 +1325,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                }));
          instructionList.add(
                 new BasicInstruction("reti_or $t1 = $t2 , 100",
-            	 "Bitwise OR immediate : Set $t1 to bitwise OR of $t2 and 12-bit immediate",
+            	 "PC = r31; Bitwise OR immediate : Set $t1 to bitwise OR of $t2 and 12-bit immediate",
                 BasicInstructionFormat.I_FORMAT,
                 "000111 fffff 0101 sssss tttttttttttt",
                 new SimulationCode()
@@ -1342,7 +1342,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                }));
          instructionList.add(
                  new BasicInstruction("reti_nor $t1 = $t2 , 100",
-             	 "Bitwise NOR : Set $t1 to bitwise NOR of $t2 and 12-bit immed",
+             	 "PC = r31; Bitwise NOR : Set $t1 to bitwise NOR of $t2 and 12-bit immed",
              	BasicInstructionFormat.I_FORMAT,
                 "000111 fffff 0111 sssss tttttttttttt",
                  new SimulationCode()
@@ -1360,7 +1360,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("reti_xor $t1 = $t2 , 100",
-            	 "Bitwise XOR immediate : Set $t1 to bitwise XOR of $t2 and  12-bit immediate",
+            	 "PC = r31; Bitwise XOR immediate : Set $t1 to bitwise XOR of $t2 and  12-bit immediate",
                 BasicInstructionFormat.I_FORMAT,
                 "000111 fffff 0110 sssss tttttttttttt",
                 new SimulationCode()
@@ -1378,7 +1378,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                  new BasicInstruction("reti_ror $t1 = $t2 , 100",
-             	 "rotate right variable : Set $t1 to result of circular rotating $t2 right by number of bits specified by 12-bit immed",
+             	 "PC = r31; rotate right variable : Set $t1 to result of circular rotating $t2 right by number of bits specified by 12-bit immed",
                  BasicInstructionFormat.R_FORMAT,
                  "000111 fffff 1011 sssss tttttttttttt",
                  new SimulationCode()
@@ -1396,7 +1396,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          
          instructionList.add(
                 new BasicInstruction("reti_sar $t1 = $t2 , 10",
-                "Shift right arithmetic : Set $t1 to result of sign-extended shifting $t2 right by number of bits specified by immediate",
+                "PC = r31; Shift right arithmetic : Set $t1 to result of sign-extended shifting $t2 right by number of bits specified by immediate",
             	 BasicInstructionFormat.R_FORMAT,
                 "000111 fffff 1010 sssss tttttttttttt",
                 new SimulationCode()
@@ -1412,7 +1412,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                }));
          instructionList.add(
                  new BasicInstruction("reti_shr $t1 = $t2 , 100",
-             	 "Shift right logical variable : Set $t1 to result of shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3",
+             	 "PC = r31; Shift right logical variable : Set $t1 to result of shifting $t2 right by number of bits specified by value in low-order 5 bits of $t3",
                  BasicInstructionFormat.R_FORMAT,
                  "000111 fffff 1001 sssss tttttttttttt",
                  new SimulationCode()
@@ -1429,7 +1429,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 }));
          instructionList.add(
                 new BasicInstruction("reti_shl $t1 = $t2,10",
-            	 "Shift left logical : Set $t1 to result of shifting $t2 left by number of bits specified by immediate",
+            	 "PC = r31; Shift left logical : Set $t1 to result of shifting $t2 left by number of bits specified by immediate",
                 BasicInstructionFormat.R_FORMAT,
                 "000111 fffff 1000 sssss tttttttttttt",
                 new SimulationCode()
@@ -1918,7 +1918,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("beqz $t1,label",
-                "Branch if equal : Branch to statement at label's address if $t1 and $t2 are equal",
+                "Branch if equal to zero : Branch to statement at label's address if $t1 is equal to zero",
             	 BasicInstructionFormat.R1_FORMAT,
                 "101000 fffff sssssssssssssssssssss",
                 new SimulationCode()
@@ -1937,7 +1937,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("bnez $t1,label",
-                "Branch if equal : Branch to statement at label's address if $t1 and $t2 are equal",
+                "Branch if not equal : Branch to statement at label's address if $t1 is not equal to zero",
             	 BasicInstructionFormat.R1_FORMAT,
                 "101001 fffff sssssssssssssssssssss",
                 new SimulationCode()
@@ -1956,7 +1956,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("bltz $t1,label",
-                "Branch if equal : Branch to statement at label's address if $t1 and $t2 are equal",
+                "Branch if less than zero : Branch to statement at label's address if $t1 and $t2 are equal",
             	 BasicInstructionFormat.R1_FORMAT,
                 "101010 fffff sssssssssssssssssssss",
                 new SimulationCode()
@@ -1975,7 +1975,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("bgez $t1,label",
-                "Branch if equal : Branch to statement at label's address if $t1 and $t2 are equal",
+                "Branch if equal to zero : Branch to statement at label's address if $t1 is greater than or equal to 0",
             	 BasicInstructionFormat.R1_FORMAT,
                 "101011 fffff sssssssssssssssssssss",
                 new SimulationCode()
@@ -1994,7 +1994,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("bgtz $t1,label",
-                "Branch if equal : Branch to statement at label's address if $t1 and $t2 are equal",
+                "Branch if greater than zero : Branch to statement at label's address if $t1 is greater than zero",
             	 BasicInstructionFormat.R1_FORMAT,
                 "101100 fffff sssssssssssssssssssss",
                 new SimulationCode()
@@ -2013,7 +2013,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          instructionList.add(
                 new BasicInstruction("blez $t1 , label",
-                "Branch if equal : Branch to statement at label's address if $t1 and $t2 are equal",
+                "Branch if less than or equal to zero : Branch to statement at label's address if $t1 is less than or equal to zero",
             	 BasicInstructionFormat.R1_FORMAT,
                 "101101 fffff sssssssssssssssssssss",
                 new SimulationCode()

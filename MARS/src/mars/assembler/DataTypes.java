@@ -73,6 +73,34 @@ public final class DataTypes {
 /** Largest magnitude negative value that can be stored in a MIPS double(negative of the max) **/
     public static final double LOW_DOUBLE_VALUE = -Double.MAX_VALUE;
 
+    //our own limits
+    public static final double MIN_IMM26_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MAX_IMM26_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MIN_IMM21_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MAX_IMM21_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MIN_IMM12_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MAX_IMM12_VALUE = -Double.MAX_VALUE;  
+    
+    public static final double MIN_IMM26U_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MAX_IMM26U_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MIN_IMM21U_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MAX_IMM21U_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MIN_IMM12U_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MAX_IMM12U_VALUE = -Double.MAX_VALUE;
+    
+    public static final double MIN_IMM2U_VALUE = 0;
+    
+    public static final double MAX_IMM2U_VALUE = 3;     
    /**
     * Get length in bytes for numeric MIPS directives.
     * @param direct Directive to be measured.

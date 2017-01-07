@@ -68,6 +68,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       public static final TokenTypes INTEGER_12    = new TokenTypes("INTEGER_12");
       public static final TokenTypes INTEGER_12U    = new TokenTypes("INTEGER_12U");
       
+      public static final TokenTypes INTEGER_26    = new TokenTypes("INTEGER_26");
+      public static final TokenTypes INTEGER_26U    = new TokenTypes("INTEGER_26U");
+      
+      public static final TokenTypes INTEGER_2     = new TokenTypes("INTEGER_2");     
+      
       public static final TokenTypes REAL_NUMBER   = new TokenTypes("REAL_NUMBER");
       public static final TokenTypes QUOTED_STRING = new TokenTypes("QUOTED_STRING");
       public static final TokenTypes PLUS          = new TokenTypes("PLUS");
