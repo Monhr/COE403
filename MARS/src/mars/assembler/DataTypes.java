@@ -86,7 +86,7 @@ public final class DataTypes {
     
     public static final double MAX_IMM12_VALUE = (int)Math.pow(2, 25) - 1;  
     
-    public static final double MIN_IMM26U_VALUE =0 ;
+    public static final double MIN_IMM26U_VALUE = 0 ;
     
     public static final double MAX_IMM26U_VALUE = (int)Math.pow(2, 26);
     

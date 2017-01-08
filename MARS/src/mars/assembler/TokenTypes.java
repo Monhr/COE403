@@ -222,6 +222,34 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                return TokenTypes.INTEGER_16;
             }			  
             return TokenTypes.INTEGER_32;  // default when no other type is applicable
+            
+            
+            /*if (i>=0 && i<=3) {
+                return TokenTypes.INTEGER_2;
+             }
+             
+            if (i>=DataTypes.MIN_IMM12U_VALUE && i<=DataTypes.MAX_IMM12U_VALUE) {
+                return TokenTypes.INTEGER_12U;
+             }
+            if (i>=DataTypes.MIN_IMM12_VALUE && i<=DataTypes.MAX_IMM12_VALUE) {
+               return TokenTypes.INTEGER_12;
+            }
+            
+            if (i>=DataTypes.MIN_IMM21U_VALUE && i<=DataTypes.MAX_IMM21U_VALUE) {
+                return TokenTypes.INTEGER_21U;
+             }
+            if (i>=DataTypes.MIN_IMM21_VALUE && i<=DataTypes.MAX_IMM21_VALUE) {
+               return TokenTypes.INTEGER_21;
+            }
+            
+            if (i>=DataTypes.MIN_IMM26U_VALUE && i<=DataTypes.MAX_IMM26U_VALUE) {
+                return TokenTypes.INTEGER_26U;
+             }
+            if (i>=DataTypes.MIN_IMM26_VALUE && i<=DataTypes.MAX_IMM26_VALUE) {
+               return TokenTypes.INTEGER_26;
+            }
+            
+             return TokenTypes.INTEGER_32;*/
          }
              catch(NumberFormatException e)
             {

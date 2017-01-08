@@ -112,8 +112,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             specToken = spec.getTokenList().get(i);
             candType = candToken.getType();
             specType = specToken.getType();
-            System.out.println("Spec Token = "+specToken+" ,cand Token = "+candToken);
-            System.out.println("Operand spec = "+specType+" ,operand cand = "+specType);
            // Type mismatch is error EXCEPT when (1) spec calls for register name and candidate is
            // register number, (2) spec calls for register number, candidate is register name and
            // names are permitted, (3)spec calls for integer of specified max bit length and 
