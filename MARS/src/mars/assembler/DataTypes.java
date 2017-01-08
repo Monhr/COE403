@@ -74,29 +74,29 @@ public final class DataTypes {
     public static final double LOW_DOUBLE_VALUE = -Double.MAX_VALUE;
 
     //our own limits
-    public static final double MIN_IMM26_VALUE = -Double.MAX_VALUE;
+    public static final double MIN_IMM26_VALUE = 0 - (int)Math.pow(2, 25);
     
-    public static final double MAX_IMM26_VALUE = -Double.MAX_VALUE;
+    public static final double MAX_IMM26_VALUE = (int)Math.pow(2, 25) - 1;
     
-    public static final double MIN_IMM21_VALUE = -Double.MAX_VALUE;
+    public static final double MIN_IMM21_VALUE = 0 - (int)Math.pow(2, 25);
     
-    public static final double MAX_IMM21_VALUE = -Double.MAX_VALUE;
+    public static final double MAX_IMM21_VALUE = (int)Math.pow(2, 25) - 1;
     
-    public static final double MIN_IMM12_VALUE = -Double.MAX_VALUE;
+    public static final double MIN_IMM12_VALUE = 0 - (int)Math.pow(2, 25);
     
-    public static final double MAX_IMM12_VALUE = -Double.MAX_VALUE;  
+    public static final double MAX_IMM12_VALUE = (int)Math.pow(2, 25) - 1;  
     
-    public static final double MIN_IMM26U_VALUE = -Double.MAX_VALUE;
+    public static final double MIN_IMM26U_VALUE =0 ;
     
-    public static final double MAX_IMM26U_VALUE = -Double.MAX_VALUE;
+    public static final double MAX_IMM26U_VALUE = (int)Math.pow(2, 26);
     
-    public static final double MIN_IMM21U_VALUE = -Double.MAX_VALUE;
+    public static final double MIN_IMM21U_VALUE = 0;
     
-    public static final double MAX_IMM21U_VALUE = -Double.MAX_VALUE;
+    public static final double MAX_IMM21U_VALUE = (int)Math.pow(2, 26);
     
-    public static final double MIN_IMM12U_VALUE = -Double.MAX_VALUE;
+    public static final double MIN_IMM12U_VALUE = 0;
     
-    public static final double MAX_IMM12U_VALUE = -Double.MAX_VALUE;
+    public static final double MAX_IMM12U_VALUE = (int)Math.pow(2, 26);
     
     public static final double MIN_IMM2U_VALUE = 0;
     

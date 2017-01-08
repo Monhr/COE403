@@ -67,7 +67,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          setBounds(x,y,width,height);
          
          // Build the splash screen
-         JLabel title = new JLabel("MARS: Mips Assembler and Runtime Simulator", JLabel.CENTER);      
+         JLabel title = new JLabel("MARS: Mudawwar Assembler and Runtime Simulator", JLabel.CENTER);      
          JLabel copyrt1 = new JLabel
                ("<html><br><br>Version "+Globals.version+" Copyright (c) "+Globals.copyrightYears+"</html>", JLabel.CENTER);
          JLabel copyrt2 = new JLabel

@@ -97,10 +97,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       public static boolean runSpeedPanelExists = false;
    	
        private static String getCopyrightYears() {
-         return "2003-2014";
+         return "2003-2017";
       }
        private static String getCopyrightHolders() {
-         return "Pete Sanderson and Kenneth Vollmar";
+         return "Orginal:Pete Sanderson and Kenneth Vollma";
       }
     
        public static void setGui(VenusUI g) {
